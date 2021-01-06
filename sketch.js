@@ -1,3 +1,48 @@
+//string 
+var string = "this is a string";
+ console.log(string);
+ 
+ // Number 
+ var num = 56;
+  console.log(num);
+
+
+//boolean
+var bool = true;
+console.log(bool);
+     
+     
+//undefined object
+var object;
+ console.log(object);
+       
+ // reassingnng the same object to null
+object= null;
+console.log(object);
+
+// array holding same data type 
+var arr1 = [1,3,6,8];
+ console.log(arr1); 
+
+// array holding diffrent data types
+var arr2 = ["hello",3,true]; 
+console.log(arr2);
+
+//array storing a list of array
+var arr3 = [[1,3],[6,8]]; 
+console.log(arr3);
+
+//acces the first element of array
+console.log(arr3[0]);
+console.log(arr3[0][1]);
+console.log(arr3[0][1]);
+
+arr3.push("aarav");
+console.log(arr3);
+
+arr3.pop();
+ console.log(arr3);
+
 const Engine = Matter.Engine;
 const World= Matter.World;
 const Bodies = Matter.Bodies;
@@ -7,6 +52,8 @@ var engine, world;
 var box1, pig1,pig3;
 var backgroundImg,platform;
 var bird, slingshot;
+
+var gamestate="play"
 
 
 function preload() {
@@ -39,6 +86,7 @@ function setup(){
 
     bird = new Bird(200,50);
 
+
     //log6 = new Log(230,180,80, PI/2);
     slingshot = new SlingShot(bird.body,{x:200, y:50});
 }
@@ -69,16 +117,21 @@ function draw(){
 }
 
 function mouseDragged(){
-    Matter.Body.setPosition(bird.body, {x: mouseX , y: mouseY});
+    if(gamestate==="play"){
+        Matter.Body.setPosition(bird.body, {x: mouseX , y: mouseY});
+
+    }
+    
 }
 
 
 function mouseReleased(){
     slingshot.fly();
+    gamestate="end"
 }
 
 function keyPressed(){
     if(keyCode === 32){
         slingshot.attach(bird.body);
     }
-}
+} 
